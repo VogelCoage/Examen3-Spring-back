@@ -1,6 +1,7 @@
 package uia.com.api.ContabilidadUIA.modelo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import uia.com.api.ContabilidadUIA.modelo.Proveedores.Proveedor;
 import uia.com.api.ContabilidadUIA.modelo.Clientes.InfoUIA;
@@ -41,6 +42,10 @@ public class ClientesRepositorio {
 		proveedor = (Proveedor) contabilidad.busca(clienteId);
 		proveedor.Print();
 		return proveedor;
+	}
+	
+	public InfoUIA agregaCatalogo(InfoUIA newCliente) {
+		return gestorProveedores.agregaCatalogo(newCliente);
 	}
 
 

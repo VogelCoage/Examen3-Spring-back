@@ -2,9 +2,11 @@ package uia.com.api.ContabilidadUIA.modelo.Gestor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 //import java.util.stream.Collectors;
+import java.util.Map.Entry;
 
 import uia.com.api.ContabilidadUIA.modelo.Clientes.InfoUIA;
 
@@ -173,6 +175,39 @@ private void carga(String tipo, List<InfoUIA> subCatalogo, String nombre)
     		return null;
     	}
     		
+	}
+	
+	@Override
+	public InfoUIA agregaCatalogo(InfoUIA newCatalogo)
+	{
+		System.out.println(this.gestor.getClass().getSimpleName());
+		
+		String tipo = newCatalogo.getType();
+		
+		if(this.gestor.getCatalogoMaestro() != null)
+		{
+			Iterator <Entry<String, InfoUIA>> tabla = this.gestor.getCatalogoMaestro().entrySet().iterator();
+			//iterating every set of entry in the HashMap
+			while(tabla.hasNext())
+			{
+				Map.Entry<String, InfoUIA> nodo = (Map.Entry<String, InfoUIA>) tabla.next();
+				if(nodo.getValue().getType().contentEquals(tipo))
+				{
+					this.gestor.getCatalogoMaestro().put(newCatalogo.getName(), newCatalogo);
+					this.Print();
+					return newCatalogo;
+				}
+				else if(!(this.ancestro.contains("Gestor")))
+				{
+					carga(tipo, nodo.getValue().getItems(), newCatalogo.getName());
+				}
+			}
+		}
+		else
+		{
+			System.out.println("Alto");
+		}
+		return null;
 	}
 
 

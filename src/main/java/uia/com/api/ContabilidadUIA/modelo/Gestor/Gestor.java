@@ -27,7 +27,10 @@ public class Gestor extends AGestor {
 		
 	}
 
-	
+	public InfoUIA agregaCatalogo(InfoUIA newCatalogo)
+	{
+		return null;
+	}
 
 
 	@Override
