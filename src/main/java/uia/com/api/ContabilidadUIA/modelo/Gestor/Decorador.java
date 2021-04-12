@@ -165,18 +165,14 @@ private void carga(String tipo, List<InfoUIA> subCatalogo, String nombre)
 	}
 
 	@Override
-	public void Busca() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
 	public InfoUIA busca(String id) {
-		if(catalogo.containsKey(id))
-    		return catalogo.get(id);
-    	else
+		if(catalogo.containsKey(id)) {
+			return catalogo.get(id);
+		}    		
+    	else {
     		return null;
+    	}
+    		
 	}
 
 

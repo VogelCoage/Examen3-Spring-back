@@ -27,11 +27,7 @@ public class Gestor extends AGestor {
 		
 	}
 
-	@Override
-	public void Busca() {
-		
-		
-	}
+	
 
 
 	@Override

@@ -2,6 +2,7 @@ package uia.com.api.ContabilidadUIA.modelo;
 
 import java.util.ArrayList;
 
+import uia.com.api.ContabilidadUIA.modelo.Proveedores.Proveedor;
 import uia.com.api.ContabilidadUIA.modelo.Clientes.InfoUIA;
 import uia.com.api.ContabilidadUIA.modelo.Gestor.DecoradorProveedores;
 import uia.com.api.ContabilidadUIA.modelo.Gestor.Gestor;
@@ -16,7 +17,7 @@ public class ClientesRepositorio {
 	public ArrayList<InfoUIA> listaCompras = null;
 	//public ArrayList<InfoUIA> listaReqs = null;
 	//public ArrayList<InfoUIA> listaCheques = null;
-	//public Proveedor proveedor = null;
+	public Proveedor proveedor = null;
 	//public String clienteId="";
 
 	public ClientesRepositorio()
@@ -34,6 +35,12 @@ public class ClientesRepositorio {
 
 	public ArrayList<InfoUIA> getListaProveedores() {
 		return listaProveedores;
+	}
+	
+	public InfoUIA getProveedor(String clienteId) {
+		proveedor = (Proveedor) contabilidad.busca(clienteId);
+		proveedor.Print();
+		return proveedor;
 	}
 
 

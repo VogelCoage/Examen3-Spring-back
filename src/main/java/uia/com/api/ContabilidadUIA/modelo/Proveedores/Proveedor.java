@@ -1,7 +1,7 @@
 package uia.com.api.ContabilidadUIA.modelo.Proveedores;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 //import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -14,7 +14,7 @@ public class Proveedor extends InfoUIA {
 	
 	Double saldo = 0.0;
 	Cuenta miCuenta = null;
-	private ArrayList<InfoUIA> lista = null;
+	//private ArrayList<InfoUIA> lista = null;
 	
 	@JsonCreator
     public Proveedor(@JsonProperty("id")int id, @JsonProperty("name")String name, @JsonProperty("saldo")double p1) 

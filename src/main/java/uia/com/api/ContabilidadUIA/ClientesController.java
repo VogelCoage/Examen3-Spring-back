@@ -1,7 +1,9 @@
 package uia.com.api.ContabilidadUIA;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,5 +24,17 @@ public class ClientesController {
 		System.out.println("Saludos desde getAllClientes()");
 		return ResponseEntity.ok(clientes.getListaProveedores());
 	}
+	
+	/*
+	 * Get a Cliente by clienteId
+	 * @param clienteId
+	 * @return a controller
+	 */
+	
+	@RequestMapping(value = "clientes/{clienteId}", method = RequestMethod.GET)
+	public ResponseEntity<InfoUIA> clienteById(@PathVariable String clienteId) throws ClassNotFoundException {
+		System.out.println("Saludos desde clienteById()");
+		return ResponseEntity.ok((InfoUIA)clientes.getProveedor(clienteId));
+	}	
 
 }
