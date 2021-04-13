@@ -2,6 +2,7 @@ package uia.com.api.ContabilidadUIA.modelo.Gestor;
 
 import java.util.Map;
 import uia.com.api.ContabilidadUIA.modelo.Clientes.InfoUIA;
+import uia.com.api.ContabilidadUIA.modelo.Clientes.ListaInfoUIA;
 
 public interface IGestor {
 	
@@ -12,5 +13,7 @@ public interface IGestor {
 	public void setCatalogo(Map<String, InfoUIA> p);
 	public IGestor getGestor();
 	public void setGestor(IGestor p);
-	public InfoUIA agregaCatalogo(InfoUIA newCatalogo);
+	public InfoUIA agregaCatalogo(InfoUIA p);
+	public ListaInfoUIA getListaInfoUIA();
+	public void salva();
 }

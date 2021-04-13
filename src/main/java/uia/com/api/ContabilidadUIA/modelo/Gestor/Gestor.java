@@ -3,6 +3,7 @@ package uia.com.api.ContabilidadUIA.modelo.Gestor;
 import java.util.Map;
 
 import uia.com.api.ContabilidadUIA.modelo.Clientes.InfoUIA;
+import uia.com.api.ContabilidadUIA.modelo.Clientes.ListaInfoUIA;
 
 public class Gestor extends AGestor {
 	
@@ -27,9 +28,15 @@ public class Gestor extends AGestor {
 		
 	}
 
-	public InfoUIA agregaCatalogo(InfoUIA newCatalogo)
+	public InfoUIA agregaCatalogo(InfoUIA p)
 	{
 		return null;
+	}
+	
+	public ListaInfoUIA getListaInfoUIA()
+	{
+		
+		return super.getMiLista();
 	}
 
 

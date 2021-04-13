@@ -2,6 +2,7 @@ package uia.com.api.ContabilidadUIA.modelo.Gestor;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,6 +18,8 @@ import uia.com.api.ContabilidadUIA.modelo.Clientes.ListaInfoUIA;
 public abstract class AGestor implements IGestor {
 	
 protected Map<String, InfoUIA> catalogoMaestro = null;
+protected ListaInfoUIA miLista = null;
+protected String nomFile = null;
 
 	public AGestor() {}
 	
@@ -24,8 +27,9 @@ protected Map<String, InfoUIA> catalogoMaestro = null;
     public AGestor(String nomFile)
     {
     	ObjectMapper mapper = new ObjectMapper();
+    	this.nomFile = nomFile;
         
-        ListaInfoUIA miLista = null;
+        
         
 		try {
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -88,6 +92,34 @@ protected Map<String, InfoUIA> catalogoMaestro = null;
     		return catalogoMaestro.get(id);
     	else
     		return null;
+    }
+    
+    public ListaInfoUIA getMiLista()
+    {
+    	
+    	return miLista;
+    }
+    
+    public void salva()
+    {
+    	ObjectMapper mapper = new ObjectMapper();
+    	
+    	try
+    	{
+    		mapper.writeValue(Paths.get(nomFile).toFile(), miLista);
+    	}
+    	catch(JsonParseException e)
+    	{
+    		e.printStackTrace();
+    	}
+    	catch(JsonMappingException e)
+    	{
+    		e.printStackTrace();
+    	}
+    	catch(IOException e)
+    	{
+    		e.printStackTrace();
+    	}
     }
 
 }

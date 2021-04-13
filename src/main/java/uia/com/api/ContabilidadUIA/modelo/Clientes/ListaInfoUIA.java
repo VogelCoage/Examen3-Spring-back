@@ -41,5 +41,11 @@ public class ListaInfoUIA {
 		public void setName(String name) {
 			this.name = name;
 		}
+		
+		public InfoUIA agregaCatalogo(InfoUIA newCatalogo)
+		{
+			//newCatalogo.Print();
+			return null;
+		}
 
 }

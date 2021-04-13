@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import uia.com.api.ContabilidadUIA.modelo.Clientes.InfoUIA;
+import uia.com.api.ContabilidadUIA.modelo.Clientes.ListaInfoUIA;
 
 public class Decorador implements IGestor {
 	
@@ -184,6 +185,7 @@ private void carga(String tipo, List<InfoUIA> subCatalogo, String nombre)
 		
 		String tipo = newCatalogo.getType();
 		
+		
 		if(this.gestor.getCatalogoMaestro() != null)
 		{
 			Iterator <Entry<String, InfoUIA>> tabla = this.gestor.getCatalogoMaestro().entrySet().iterator();
@@ -192,8 +194,11 @@ private void carga(String tipo, List<InfoUIA> subCatalogo, String nombre)
 			{
 				Map.Entry<String, InfoUIA> nodo = (Map.Entry<String, InfoUIA>) tabla.next();
 				if(nodo.getValue().getType().contentEquals(tipo))
-				{
+				{					
 					this.gestor.getCatalogoMaestro().put(newCatalogo.getName(), newCatalogo);
+					newCatalogo.Print();
+					this.gestor.getListaInfoUIA().agregaCatalogo(newCatalogo);
+					this.gestor.salva();
 					this.Print();
 					return newCatalogo;
 				}
@@ -220,6 +225,18 @@ private void carga(String tipo, List<InfoUIA> subCatalogo, String nombre)
 
 	@Override
 	public void setCatalogo(Map<String, InfoUIA> p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ListaInfoUIA getListaInfoUIA() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void salva() {
 		// TODO Auto-generated method stub
 		
 	}
