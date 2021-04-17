@@ -42,10 +42,12 @@ public class ListaInfoUIA {
 			this.name = name;
 		}
 		
-		public InfoUIA agregaCatalogo(InfoUIA newCatalogo)
+		public void agregaCatalogo(InfoUIA newCatalogo)
 		{
-			//newCatalogo.Print();
-			return null;
+			if(this.items !=null)
+			{
+				this.items.add(newCatalogo);
+			}
 		}
 
 }

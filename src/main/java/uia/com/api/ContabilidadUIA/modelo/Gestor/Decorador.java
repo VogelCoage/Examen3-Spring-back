@@ -124,30 +124,54 @@ public class Decorador implements IGestor {
 
 	}
 	
-	
-private void carga(String tipo, List<InfoUIA> subCatalogo, String nombre) 
-{
-	if(subCatalogo != null)
+	private void carga(String tipo, List<InfoUIA> subCatalogo, String nombre) 
 	{
-				subCatalogo.forEach(p->{
-					if(p.getClass().getSimpleName().contains(tipo))
-					{
-						if(p.getName().contains(nombre))
-							p.setName(p.getName());
+		if(subCatalogo != null)
+		{
+					subCatalogo.forEach(p->{
+						if(p.getClass().getSimpleName().contains(tipo))
+						{
+							if(p.getName().contains(nombre))
+								p.setName(p.getName());
+							else
+								p.setName((nombre+"-"+p.getName()));
+							lista.add(p);
+						}
 						else
-							p.setName((nombre+"-"+p.getName()));
-						lista.add(p);
-					}
-					else
-					{
-						if(p.getName().contains(nombre))
-							carga(tipo, p.getItems(), p.getName());
-						else
-							carga(tipo, p.getItems(), (nombre+"-"+p.getName()));
-					}
-				});
+						{
+							if(p.getName().contains(nombre))
+								carga(tipo, p.getItems(), p.getName());
+							else
+								carga(tipo, p.getItems(), (nombre+"-"+p.getName()));
+						}
+					});
+		}
 	}
-}
+	
+	
+	private void carga(String tipo, List<InfoUIA> subCatalogo, InfoUIA newCatalogo) 
+	{
+		if(subCatalogo != null)
+		{
+					subCatalogo.forEach(p->{
+						if(p.getClass().getSimpleName().contains(tipo))
+						{
+							if(p.getName().contains(nombre))
+								p.setName(p.getName());
+							else
+								p.setName((nombre+"-"+p.getName()));
+							lista.add(p);
+						}
+						else
+						{
+							if(p.getName().contains(nombre))
+								carga(tipo, p.getItems(), p.getName());
+							else
+								carga(tipo, p.getItems(), (nombre+"-"+p.getName()));
+						}
+					});
+		}
+	}
 	
 	
 	@Override
@@ -204,7 +228,7 @@ private void carga(String tipo, List<InfoUIA> subCatalogo, String nombre)
 				}
 				else if(!(this.ancestro.contains("Gestor")))
 				{
-					carga(tipo, nodo.getValue().getItems(), newCatalogo.getName());
+					carga(tipo, nodo.getValue().getItems(), newCatalogo);
 				}
 			}
 		}

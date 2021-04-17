@@ -15,7 +15,7 @@ public class ClientesRepositorio {
 	public DecoradorProveedores gestorProveedores = null;		
 	public ArrayList<InfoUIA> listaProveedores = null;
 	//public ArrayList<InfoUIA> listaCuentas = null;
-	public ArrayList<InfoUIA> listaCompras = null;
+	//public ArrayList<InfoUIA> listaCompras = null;
 	//public ArrayList<InfoUIA> listaReqs = null;
 	//public ArrayList<InfoUIA> listaCheques = null;
 	public Proveedor proveedor = null;
@@ -42,6 +42,10 @@ public class ClientesRepositorio {
 		proveedor = (Proveedor) contabilidad.busca(clienteId);
 		proveedor.Print();
 		return proveedor;
+	}
+	
+	public Object setProveedor(String newCliente) {
+		return null;
 	}
 	
 	public InfoUIA agregaCatalogo(InfoUIA newCliente) {

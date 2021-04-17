@@ -14,7 +14,6 @@ public class Gestor extends AGestor {
 
 	public Gestor()
 	{
-		super();
 	}	
 	
 	@Override

@@ -1,4 +1,5 @@
-package uia.com.api.ContabilidadUIA;
+package uia.com.api.ContabilidadUIA.controladores;
+
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

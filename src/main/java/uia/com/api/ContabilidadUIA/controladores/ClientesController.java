@@ -1,6 +1,7 @@
-package uia.com.api.ContabilidadUIA;
+package uia.com.api.ContabilidadUIA.controladores;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import uia.com.api.ContabilidadUIA.modelo.Clientes.InfoUIA;
 import uia.com.api.ContabilidadUIA.modelo.*;
 
 @RestController
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 public class ClientesController {
 	/*
 	 * Get all Clientes - provedores
