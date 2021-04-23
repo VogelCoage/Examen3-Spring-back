@@ -18,7 +18,7 @@ import uia.com.api.ContabilidadUIA.modelo.*;
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 public class ClientesController {
 	/*
-	 * Get all Clientes - provedores
+	 * Get all Clientes - proveedores
 	 */
 	
 	private ClientesRepositorio clientes = new ClientesRepositorio();
