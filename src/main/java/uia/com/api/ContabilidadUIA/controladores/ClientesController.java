@@ -29,6 +29,12 @@ public class ClientesController {
 		return ResponseEntity.ok(clientes.getListaProveedores());
 	}
 	
+	@RequestMapping("clientes/size")
+	public ResponseEntity<Integer> countAllClientes(){
+		System.out.println("Contando clientes");
+		return ResponseEntity.ok(clientes.contarProveedores());
+	}
+	
 	/*
 	 * Get a Cliente by clienteId
 	 * @param clienteId

@@ -29,6 +29,14 @@ public class ClientesRepositorio {
 	 listaProveedores = gestorProveedores.getLista();
 	}
 	
+	public Integer contarProveedores() {
+		Integer counter = 0;
+		ArrayList<InfoUIA> lista = getListaProveedores();
+		lista.forEach(proveedor -> counter + 1);
+		return counter;
+		
+	}
+	
 	
 	public ArrayList<InfoUIA> getListaProveedores(String clienteName) {
 		return listaProveedores;
