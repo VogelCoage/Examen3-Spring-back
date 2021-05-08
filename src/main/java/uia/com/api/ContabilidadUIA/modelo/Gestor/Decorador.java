@@ -8,6 +8,7 @@ import java.util.Map;
 //import java.util.stream.Collectors;
 import java.util.Map.Entry;
 
+import uia.com.api.ContabilidadUIA.controladores.ParmsCliente;
 import uia.com.api.ContabilidadUIA.modelo.Clientes.InfoUIA;
 import uia.com.api.ContabilidadUIA.modelo.Clientes.ListaInfoUIA;
 
@@ -16,6 +17,9 @@ public class Decorador implements IGestor {
 	protected IGestor gestor;
 	protected Map<String, InfoUIA> catalogo = new HashMap<String, InfoUIA>();
 	ArrayList <InfoUIA> lista = new ArrayList<InfoUIA>();
+	ArrayList <InfoUIA> pagina = new ArrayList<InfoUIA>();
+	protected int paginaActual = 0;
+	protected int tamPaginaActual = 0;
 	protected String ancestro="";
 	protected String nombre="";
 	//ArrayList <ClienteJSP> listaJSP = new ArrayList<ClienteJSP>();
@@ -63,6 +67,68 @@ public class Decorador implements IGestor {
 		}
 		
 		return lista;
+	}
+	
+	public ArrayList<InfoUIA> getPagina(ParmsCliente parametros)
+	{
+		int ndxMin = 0;
+		int ndxMax = 0;
+		
+		if(this.paginaActual != Integer.valueOf(parametros.getPagina()))
+		{
+			this.paginaActual = Integer.valueOf(parametros.getPagina());
+		}
+		
+		if(this.tamPaginaActual != Integer.valueOf(parametros.getTamanoPag()))
+		{
+			this.tamPaginaActual = Integer.valueOf(parametros.getTamanoPag());
+		}
+		
+		if(lista.isEmpty())
+		{
+			System.out.println(this.gestor.getClass().getSimpleName());
+			
+			if(this.gestor.getCatalogoMaestro() != null)
+			{
+				for(Map.Entry<String, InfoUIA> p: this.gestor.getCatalogoMaestro().entrySet())
+				{
+					nombre = p.getValue().getName();
+					p.getValue().setName(nombre);
+					lista.add(p.getValue());
+				}
+			}
+		}
+		
+		if(this.pagina.isEmpty())
+		{
+			this.pagina.clear();
+		}
+		
+		ndxMin = this.paginaActual * this.tamPaginaActual;
+		ndxMax = (this.paginaActual + 1) * this.tamPaginaActual;
+		
+		if(ndxMax <= this.lista.size())
+		{
+			this.pagina = new ArrayList<InfoUIA>(this.lista.subList(ndxMin, ndxMax));
+		}
+		else
+		{
+			ndxMax = this.lista.size();
+			if(ndxMin >= ndxMax)
+			{
+				if((this.paginaActual - 1) >= 0)
+				{
+					this.paginaActual = this.paginaActual - 1;
+				}
+				else
+				{
+					this.paginaActual = 0;
+				}
+			}
+			this.pagina = new ArrayList<InfoUIA>(this.lista.subList(ndxMin, ndxMax));
+		}
+		
+		return this.pagina;
 	}
 
 
@@ -223,6 +289,11 @@ public class Decorador implements IGestor {
 					newCatalogo.Print();
 					this.gestor.getListaInfoUIA().agregaCatalogo(newCatalogo);
 					this.gestor.salva();
+					if(this.lista != null)
+					{
+						this.lista.clear();
+						this.getLista();
+					}
 					this.Print();
 					return newCatalogo;
 				}
@@ -242,8 +313,7 @@ public class Decorador implements IGestor {
 
 	@Override
 	public Map<String, InfoUIA> getCatalogoMaestro() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.gestor.getCatalogoMaestro();
 	}
 
 

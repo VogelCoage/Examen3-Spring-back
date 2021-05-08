@@ -12,28 +12,37 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import uia.com.api.ContabilidadUIA.modelo.Clientes.InfoUIA;
-import uia.com.api.ContabilidadUIA.modelo.*;
+import uia.com.api.ContabilidadUIA.modelo.ClientesRepositorio;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 public class ClientesController {
 	/*
 	 * Get all Clientes - proveedores
+	 * @return a controller
 	 */
 	
 	private ClientesRepositorio clientes = new ClientesRepositorio();
+	ParmsCliente misParametros = null;
 	
-	@RequestMapping("clientes")
-	public ResponseEntity<List<InfoUIA>> getAllClientes() {
+	@RequestMapping(value = "clientes", method = RequestMethod.GET)
+	
+	public ResponseEntity<List<InfoUIA>> getAllClientes(ParmsCliente parameters)
+	{
 		System.out.println("Saludos desde getAllClientes()");
-		return ResponseEntity.ok(clientes.getListaProveedores());
+		misParametros = parameters;
+		int size = 0;
+		if(clientes.getListaProveedores() != null)
+		{
+			size = clientes.getListaProveedores().size();
+			System.out.println("regreso:\t" + size + "\t clientes:");
+			System.out.println("parametros:\t pagina:\t" + misParametros.getPagina() +
+					"\t tamPagina:\t" + misParametros.getTamanoPag());
+		}
+		return ResponseEntity.ok(clientes.getListaProveedores(misParametros));
 	}
 	
-	@RequestMapping("clientes/size")
-	public ResponseEntity<Integer> countAllClientes(){
-		System.out.println("Contando clientes");
-		return ResponseEntity.ok(clientes.contarProveedores());
-	}
+	
 	
 	/*
 	 * Get a Cliente by clienteId
@@ -42,9 +51,28 @@ public class ClientesController {
 	 */
 	
 	@RequestMapping(value = "clientes/{clienteId}", method = RequestMethod.GET)
+	
 	public ResponseEntity<InfoUIA> clienteById(@PathVariable String clienteId) throws ClassNotFoundException {
 		System.out.println("Saludos desde clienteById()");
 		return ResponseEntity.ok((InfoUIA)clientes.getProveedor(clienteId));
+	}
+	
+	/*
+	 * get size Clientes
+	 * @return
+	 * @return a controller
+	 */
+	
+	@RequestMapping(value = "clientes/size", method = RequestMethod.GET)
+	
+	public ResponseEntity<Integer> sizeClientes() throws ClassNotFoundException {
+		int size = -1;
+		if(this.clientes.getGestorProveedores().getCatalogoMaestro() != null)
+		{
+			size = this.clientes.getGestorProveedores().getCatalogoMaestro().size();
+		}
+		System.out.println("Saludos desde size Clientes(): " + size);
+		return ResponseEntity.ok(size);
 	}
 	
 	/*
@@ -54,9 +82,14 @@ public class ClientesController {
 	 */
 	
 	@RequestMapping(value = "clientes", method = RequestMethod.POST)
-	public ResponseEntity<Object> agregaCliente(@RequestBody InfoUIA newCliente){
+	
+	public ResponseEntity<List<InfoUIA>> agregaCliente(@RequestBody InfoUIA newCliente){
 		System.out.println("Saludos desde agregaCliente()");
-		return ResponseEntity.ok((InfoUIA)clientes.agregaCatalogo(newCliente));
+		if(clientes.agregaCatalogo(newCliente) == null)
+		{
+			System.out.println("Error en agregaCliente()");
+		}
+		return ResponseEntity.ok(clientes.getListaProveedores(misParametros));
 	}
 
 }

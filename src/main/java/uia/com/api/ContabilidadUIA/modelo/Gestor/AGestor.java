@@ -120,6 +120,52 @@ protected String nomFile = null;
     	{
     		e.printStackTrace();
     	}
+    	recargaLista();
+    }
+    
+    private void recargaLista()
+    {
+    	ObjectMapper mapper = new ObjectMapper();
+    	
+    	if(miLista != null)
+    	{
+    		miLista.getItems().clear();
+    	}
+    	
+    	try {
+    		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    		miLista = mapper.readValue(new FileInputStream(nomFile), ListaInfoUIA.class);
+    	}
+    	
+    	catch(JsonParseException e) {
+    		e.printStackTrace();
+    	}
+    	catch(JsonMappingException e) {
+    		e.printStackTrace();
+    	}
+    	catch(IOException e) {
+    		e.printStackTrace();
+    	}
+    	
+    	if(miLista != null) {
+    		System.out.println("----- Items List -----");
+    		
+    		for(InfoUIA mi : miLista.getItems())
+    		{
+    			System.out.println("Type = " + mi.getClass() + ", id = " + mi.getId() + ", name = " + mi.getName());
+    		}
+    	}
+    	
+    	if(catalogoMaestro != null)
+    	{
+    		catalogoMaestro.clear();
+    	}
+    	else
+    	{
+    		catalogoMaestro = new HashMap<String, InfoUIA>();
+    	}
+    	catalogoMaestro = miLista.getItems().stream()
+    			.collect(Collectors.toMap(InfoUIA::getName, item -> item));
     }
 
 }

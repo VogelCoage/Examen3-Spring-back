@@ -3,6 +3,7 @@ package uia.com.api.ContabilidadUIA.modelo;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import uia.com.api.ContabilidadUIA.controladores.ParmsCliente;
 import uia.com.api.ContabilidadUIA.modelo.Proveedores.Proveedor;
 import uia.com.api.ContabilidadUIA.modelo.Clientes.InfoUIA;
 import uia.com.api.ContabilidadUIA.modelo.Gestor.DecoradorProveedores;
@@ -29,20 +30,17 @@ public class ClientesRepositorio {
 	 listaProveedores = gestorProveedores.getLista();
 	}
 	
-	public Integer contarProveedores() {
-		Integer counter = 0;
-		ArrayList<InfoUIA> lista = getListaProveedores();
-		lista.forEach(proveedor -> counter + 1);
-		return counter;
 		
-	}
-	
-	
 	public ArrayList<InfoUIA> getListaProveedores(String clienteName) {
 		return listaProveedores;
 	}
-
+	
 	public ArrayList<InfoUIA> getListaProveedores() {
+		return listaProveedores;
+	}
+
+	public ArrayList<InfoUIA> getListaProveedores(ParmsCliente parameters) {
+		listaProveedores = gestorProveedores.getPagina(parameters);
 		return listaProveedores;
 	}
 	
