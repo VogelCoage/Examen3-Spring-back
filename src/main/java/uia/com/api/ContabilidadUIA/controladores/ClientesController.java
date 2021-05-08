@@ -1,5 +1,6 @@
 package uia.com.api.ContabilidadUIA.controladores;
 
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,8 @@ import uia.com.api.ContabilidadUIA.modelo.Clientes.InfoUIA;
 import uia.com.api.ContabilidadUIA.modelo.ClientesRepositorio;
 
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
+
 public class ClientesController {
 	/*
 	 * Get all Clientes - proveedores
@@ -91,5 +93,17 @@ public class ClientesController {
 		}
 		return ResponseEntity.ok(clientes.getListaProveedores(misParametros));
 	}
+	
+@RequestMapping(value = "clientes", method = RequestMethod.PUT)
+	
+	public ResponseEntity<List<InfoUIA>> actualizarCliente(@RequestBody InfoUIA newCliente){
+		System.out.println("Saludos desde agregaCliente()");
+		if(clientes.actualizaCatalogo(newCliente) == null)
+		{
+			System.out.println("Error en actualizarCliente()");
+		}
+		return ResponseEntity.ok(clientes.getListaProveedores(misParametros));
+	}
+	
 
 }

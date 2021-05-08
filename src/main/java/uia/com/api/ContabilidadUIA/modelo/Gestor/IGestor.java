@@ -14,6 +14,7 @@ public interface IGestor {
 	public IGestor getGestor();
 	public void setGestor(IGestor p);
 	public InfoUIA agregaCatalogo(InfoUIA p);
+	public InfoUIA actualizaCatalogo(InfoUIA p);
 	public ListaInfoUIA getListaInfoUIA();
 	public void salva();
 }

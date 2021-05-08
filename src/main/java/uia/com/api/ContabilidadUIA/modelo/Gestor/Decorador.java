@@ -309,6 +309,48 @@ public class Decorador implements IGestor {
 		}
 		return null;
 	}
+	
+	@Override
+	public InfoUIA actualizaCatalogo(InfoUIA newCatalogo)
+	{
+		System.out.println(this.gestor.getClass().getSimpleName());
+		
+		String tipo = newCatalogo.getType();
+		
+		
+		if(this.gestor.getCatalogoMaestro() != null)
+		{
+			Iterator <Entry<String, InfoUIA>> tabla = this.gestor.getCatalogoMaestro().entrySet().iterator();
+			//iterating every set of entry in the HashMap
+			while(tabla.hasNext())
+			{
+				Map.Entry<String, InfoUIA> nodo = (Map.Entry<String, InfoUIA>) tabla.next();
+				if(nodo.getValue().getType().contentEquals(tipo))
+				{					
+					this.gestor.getCatalogoMaestro().put(newCatalogo.getName(), newCatalogo);
+					newCatalogo.Print();
+					this.gestor.getListaInfoUIA().agregaCatalogo(newCatalogo);
+					this.gestor.salva();
+					if(this.lista != null)
+					{
+						this.lista.clear();
+						this.getLista();
+					}
+					this.Print();
+					return newCatalogo;
+				}
+				else if(!(this.ancestro.contains("Gestor")))
+				{
+					carga(tipo, nodo.getValue().getItems(), newCatalogo);
+				}
+			}
+		}
+		else
+		{
+			System.out.println("Alto");
+		}
+		return null;
+	}
 
 
 	@Override

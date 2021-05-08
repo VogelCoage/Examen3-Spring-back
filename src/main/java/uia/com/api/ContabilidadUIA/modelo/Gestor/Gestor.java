@@ -32,6 +32,11 @@ public class Gestor extends AGestor {
 		return null;
 	}
 	
+	public InfoUIA actualizaCatalogo(InfoUIA p)
+	{
+		return null;
+	}
+	
 	public ListaInfoUIA getListaInfoUIA()
 	{
 		

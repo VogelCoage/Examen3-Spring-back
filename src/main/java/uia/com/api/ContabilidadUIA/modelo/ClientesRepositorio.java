@@ -57,6 +57,10 @@ public class ClientesRepositorio {
 	public InfoUIA agregaCatalogo(InfoUIA newCliente) {
 		return gestorProveedores.agregaCatalogo(newCliente);
 	}
+	
+	public InfoUIA actualizaCatalogo(InfoUIA newCliente) {
+		return gestorProveedores.actualizaCatalogo(newCliente);
+	}
 
 
 	public void setListaProveedores(ArrayList<InfoUIA> listaProveedores) {
